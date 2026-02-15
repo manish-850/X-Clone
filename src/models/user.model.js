@@ -15,31 +15,31 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: [true, "Email is required"]
     },
-    followers: {
-        type: Array,
-        default: []
-    },
-    following: {
-        type: Array,
-        default: []
-    },
+    followers: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "user",
+        defalut: []
+    }],
+    following: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "user",
+        defalut: []
+    }],
     bio: String,
     profileImg: {
         type: String,
         default: "https://static.vecteezy.com/system/resources/thumbnails/035/857/753/small/people-face-avatar-icon-cartoon-character-png.png"
     },
-    posts: {
-        type: Array,
-        default: []
-    },
-    likes: {
-        type: Array,
-        default: []
-    },
-    saves: {
-        type: Array,
-        default: []
-    }
+    posts: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "post",
+        defalut: []
+    }],
+    saves: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "post",
+            defalut: []
+        }]
 })
 
 const userModel = mongoose.model("user", userSchema);

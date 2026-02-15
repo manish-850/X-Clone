@@ -14,6 +14,11 @@ const postSchema = new mongoose.Schema({
         type: String,
         required: [true, "Image is required for post creation."]
     },
+    likes: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "user",
+            defalut:[]
+        }],
     createdAt: Date
 
 })
