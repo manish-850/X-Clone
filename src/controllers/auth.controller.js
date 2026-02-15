@@ -28,7 +28,8 @@ const registerController = async (req, res) => {
                             username: user.username,
                             email: user.email,
                             bio: user.bio,
-                            profileImg: user.profileImg
+                            profileImg: user.profileImg,
+                            _id:user._id
                         }
                     })
 

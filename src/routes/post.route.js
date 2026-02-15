@@ -7,5 +7,7 @@ const storage = multer.memoryStorage()
 const upload = multer({ storage: storage })
 
 postRouter.post("/",isLoggedIn ,upload.single("postImg"),postConroller.createController)
+postRouter.get("/", isLoggedIn,postConroller.getController)
+postRouter.get("/details/:postId", isLoggedIn, postConroller.getDetailsController)
 
 module.exports = postRouter;
