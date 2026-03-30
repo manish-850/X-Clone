@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const followSchema = new mongoose.Schema({
-    followers: {
+    follower: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "user",
         required:true
@@ -10,8 +10,10 @@ const followSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "user",
         required: true
-    },
-    timestamps:true
+    },    
+},
+{
+    timestamps: true // Enable timestamps option
 })
 
 const followModel = mongoose.model("follow", followSchema);
