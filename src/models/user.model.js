@@ -15,11 +15,6 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: [true, "Email is required"]
     },
-    followers: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "user",
-        defalut: []
-    }],
     following: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "user",

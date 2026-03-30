@@ -37,7 +37,7 @@ const getDetailsController = async (req, res) => {
         message:"User is not authorised"
     })
     return res.status(200).json({
-        message:"post details fetched successfully",
+        message:"Post details fetched successfully",
         post
     })
 }
