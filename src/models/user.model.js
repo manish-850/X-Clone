@@ -15,11 +15,6 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: [true, "Email is required"]
     },
-    following: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "user",
-        defalut: []
-    }],
     bio: String,
     profileImg: {
         type: String,

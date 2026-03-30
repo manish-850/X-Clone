@@ -8,9 +8,23 @@ const follow = async (req, res) => {
         message: "User not found"
     })
 
+    if (String(req.user.userId) === String(user._id)) return res.status(409).json({
+        message:"User can't follow itself"
+    })
+
+    const isfollowed = await followModel.findOne({
+        follower:req.user.userId,
+        followee:user._id
+    });
+    
+    if(isfollowed) return res.status(400).json({
+        message:"User has been already followed.",
+        follow:isfollowed
+    })
+
     const follow = await followModel.create({
-        follower: user._id,
-        followee: req.user.userId,
+        follower: req.user.userId,
+        followee: user._id,
     })
 
     return res.status(200).json({
@@ -19,6 +33,25 @@ const follow = async (req, res) => {
     })
 }
 
+const unfollow = async (req,res) =>{
+    const isFollowing = await followModel.findOne({
+        follower:req.user.userId,
+        followee:req.params.id,
+    });
+    if(!isFollowing) return res.status(400).json({
+        message:"User has not been followed."
+    })
+    const unfollow = await followModel.findOneAndDelete({
+        follower: req.user.userId,
+        followee: req.params.id,
+    });
+    return res.status(200).json({
+        message:"User has been unfollowed.",
+        unfollow
+    })
+}
+
 module.exports = {
-    follow
+    follow,
+    unfollow
 }

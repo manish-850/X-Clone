@@ -1,5 +1,6 @@
 const postModel = require("../models/post.model");
 const userModel = require("../models/user.model");
+const likeModel = require("../models/like.model");
 const saveImgToImageKit = require("../services/imageKit")
 
 const createController = async (req, res) => {
@@ -42,8 +43,59 @@ const getDetailsController = async (req, res) => {
     })
 }
 
+const likeController = async (req,res) => {
+    const post = await postModel.findOne({_id:req.params.postId});
+    const isLiked = await likeModel.findOne({
+        post:req.params.postId,
+        user:req.user.userId
+    })
+
+    if(!post) return res.status(404).json({
+        message:"Post not found"
+    })
+
+    if(isLiked) return res.status(409).json({
+        message:"Post has been already liked."
+    })
+    const like = await likeModel.create({
+        post:req.params.postId,
+        user:req.user.userId
+    })
+    return res.status(200).json({
+        message:"Post has been liked.",
+        like
+    })
+
+}
+const dislikeController = async (req,res) => {
+    const post = await postModel.findOne({_id:req.params.postId});
+    const isLiked = await likeModel.findOne({
+        post:req.params.postId,
+        user:req.user.userId
+    })
+
+    if(!post) return res.status(404).json({
+        message:"Post not found"
+    })
+
+    if(!isLiked) return res.status(409).json({
+        message:"Post has not liked."
+    })
+    const dislike = await likeModel.findOneAndDelete({
+        post:req.params.postId,
+        user:req.user.userId
+    })
+    return res.status(200).json({
+        message:"Post has been disliked.",
+        dislike
+    })
+
+}
+
 module.exports = {
     createController,
     getController,
-    getDetailsController
+    getDetailsController,
+    likeController,
+    dislikeController
 }
