@@ -1,17 +1,16 @@
 import { useState } from "react";
+import { Link, useNavigate } from "react-router";
+import { loginHandler } from "./auth.api";
 import "./Styles/form.scss";
-import axios from 'axios'
 const Login = () => {
   const [userCredential, setUserCredential] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
   const formHandler = async (e) => {
     e.preventDefault();
-    const response = await axios.post(
-      "http://localhost:3000/api/auth/login",
-      { userCredential, password },
-      { withCredentials: true }
-    );
-    console.log(response.data)
+    const data = await loginHandler(userCredential, password);
+    console.log(data)
+    navigate("/");
   };
   return (
     <main>
@@ -24,7 +23,7 @@ const Login = () => {
           action=""
         >
           <div className="input-container">
-            <p>Email or Username : </p>
+            <p>Email or Username</p>
             <input
               onInput={(e) => {
                 setUserCredential(e.target.value);
@@ -35,7 +34,7 @@ const Login = () => {
             />
           </div>
           <div className="input-container">
-            <p>Password : </p>
+            <p>Password</p>
             <input
               onInput={(e) => {
                 setPassword(e.target.value);
@@ -48,7 +47,7 @@ const Login = () => {
           <button type="submit">Login</button>
         </form>
         <p>
-          Don't have an account? <a href="/register">Register</a>{" "}
+          Don't have an account? <Link to="/register">Register</Link>
         </p>
       </div>
     </main>

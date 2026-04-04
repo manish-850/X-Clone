@@ -1,19 +1,17 @@
 import { useState } from 'react'
-import axios from 'axios'
+import { Link, useNavigate } from 'react-router';
+import { registerHandler } from './auth.api';
 import "./Styles/form.scss";
 const Register = () => {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-
+    const navigate = useNavigate();
     const formHandler = async (e)=>{
         e.preventDefault();
-        const response = await axios.post(
-          "http://localhost:3000/api/auth/register",
-          { username, email, password },
-          { withCredentials: true }
-        );
-        console.log(response.data)
+        const data = await registerHandler(username, email, password);
+        console.log(data)
+        navigate("/");
     }
   return (
     <main>
@@ -25,7 +23,7 @@ const Register = () => {
         }} 
         action="">
           <div className="input-container">
-            <p>Username : </p>
+            <p>Username</p>
             <input
               onInput={(e) => {
                 setUsername(e.target.value);
@@ -36,7 +34,7 @@ const Register = () => {
             />
           </div>
           <div className="input-container">
-            <p>Email : </p>
+            <p>Email</p>
             <input
               onInput={(e) => {
                 setEmail(e.target.value);
@@ -47,7 +45,7 @@ const Register = () => {
             />
           </div>
           <div className="input-container">
-            <p>Password : </p>
+            <p>Password</p>
             <input
               onInput={(e) => {
                 setPassword(e.target.value);
@@ -60,7 +58,7 @@ const Register = () => {
           <button type="submit">Register</button>
         </form>
         <p>
-          Don't have an account? <a href="/login">Login</a>
+          Already registered? <Link to="/login">Login</Link>
         </p>
       </div>
     </main>
