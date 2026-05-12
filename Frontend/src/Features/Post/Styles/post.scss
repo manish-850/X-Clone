@@ -1,67 +1,159 @@
-.post{
-    width: 100%;
-    min-height: 120px;
-    // background-color: yellow;
-    border: 1px solid rgb(143, 143, 143);
-    padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
-    display: flex;
-    gap: 0.5rem;
+.post {
+  width: 100%;
+  min-height: 120px;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  display: flex;
+  gap: 0.5rem;
 
-    .post-left{
-        width: 10%;
-        height: 100%;
-        // background-color: purple;
+  .post-left {
+    width: 10%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    .img-container {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      overflow: hidden;
+    }
+  }
+  .post-center {
+    flex: 1;
+    .post-center-top {
+      display: flex;
+      .post-center-top-left {
         display: flex;
-        justify-content: center;
-        // padding: 0.2rem;
-        .img-container{
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            overflow: hidden;
-        }
+        align-items: center;
+        gap: 0.3rem;
+      }
+      .name {
+        font-weight: 400;
+      }
+      .username {
+        color: rgb(143, 143, 143);
+        font-size: 12px;
+      }
+      .time {
+        color: rgb(143, 143, 143);
+        font-size: 12px;
+      }
     }
-    .post-center{
-        flex: 1;
-        // background-color: aqua;
-        .post-center-top{
-            display: flex;
-            .post-center-top-left{
-                display: flex;
-                align-items: center;
-                gap: 0.3rem;
-            }
-            .name{
-                font-weight: 400;
-                // font-size: 18px;
-            }
-            .username{
-                color: rgb(143, 143, 143);
-                font-size: 12px;
-            }
-            .time{
-                color: rgb(143, 143, 143);
-                font-size: 12px;
-            }
-        }
-        .post-center-center{
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            padding-top: 0.5rem;
-            .post-text{
-            font-size: 14px;
-        }
-        .post-img{
-            border-radius: 1rem;
-            max-width: 100%;
-        }
-        }
+    .post-center-center {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      padding-top: 0.5rem;
+      .post-text {
+        font-size: 14px;
+      }
+      .post-img {
+        border-radius: 1rem;
+        max-width: 100%;
+        border: 1px solid rgb(63, 63, 63);
+      }
     }
-    .post-right{
-        width: 10%;
-        height: 100%;
-        // background-color: purple;
+  }
+  .post-right {
+    width: 10%;
+    height: 100%;
+  }
+}
+
+//add post btn
+.createBtn-container {
+  background-color: rgb(255, 255, 255);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  position: fixed;
+  right: 32%;
+  bottom: 8%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .createBtn {
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+  }
+}
+
+// post form
+.postform-container {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #000000a6;
+  z-index: 99;
+  display: flex;
+  justify-content: center;
+  padding-top: 2rem;
+  .postform-wrapper {
+    width: 45%;
+    height: 55%;
+    background-color: #333;
+    border-radius: 2rem;
+    padding: 1rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    .postform-top {
+      width: 100%;
+      height: 10%;
+      .closeform-btn {
+        cursor: pointer;
+      }
     }
+    .postform-center {
+      width: 100%;
+      min-height: 75%;
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+
+        .caption {
+          min-height: 10vw;
+          resize: none;
+          font-size: 18px;
+          border: 0;
+          outline: none;
+          background-color: transparent;
+          color: #fff;
+          padding: 0 1rem;
+        }
+      }
+    }
+    .postform-bottom {
+      width: 100%;
+      height: 15%;
+      display: flex;
+      justify-content: space-between;
+      .postform-bottomleft {
+        display: flex;
+        align-items: center;
+        .img-upload-btn {
+            background-color: transparent;
+            border: 0;
+          cursor: pointer;
+        }
+      }
+      .postform-bottomright {
+        button{
+            background-color: #fff;
+            border-radius: 1.5rem;
+            border: 0;
+            font-size: 16px;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+        }
+      }
+    }
+  }
 }

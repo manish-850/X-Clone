@@ -24,7 +24,9 @@ const Post = ({postData}) => {
           <p className="post-text">
             {postData.caption}
           </p>
-          <img src={postData.postImg} alt="" className="post-img" />
+          
+            <img src={postData.url} alt="" className="post-img" />
+          
         </div>
       </div>
       <div className="post-right"></div>

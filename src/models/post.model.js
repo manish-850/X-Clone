@@ -10,7 +10,10 @@ const postSchema = new mongoose.Schema({
         ref: "user",
         required: [true, "Post creation is not allowed without user."]
     },
-    postImg: {
+    url: {
+        type: String,
+    },
+    thumbnailUrl: {
         type: String,
     },
     likes: [{
