@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { RiCloseLine,RiImageUploadLine } from "@remixicon/react";
 import { postCreationHandler } from "../Services/post.api";
+import "../Styles/post.scss";
 
 const PostForm = ({ setShowPostForm, setRefreshFeed }) => {
   const [caption, setcaption] = useState("");
   const [postImg, setPostImg] = useState(null);
+  const [preview, setPreview] = useState("");
 
   const submitHandler = async (e, caption, postImg) => {
     e.preventDefault();
@@ -14,7 +16,6 @@ const PostForm = ({ setShowPostForm, setRefreshFeed }) => {
 
       formData.append("caption", caption);
       formData.append("postImg", postImg);
-      //  console.log(formData.get("postImg"),formData.get("caption"))
       await postCreationHandler(formData);
       setcaption("");
       setShowPostForm(false);
@@ -60,12 +61,13 @@ const PostForm = ({ setShowPostForm, setRefreshFeed }) => {
               onChange={(e) => {
                 console.log(e.target.files[0]);
                 setPostImg(e.target.files[0]);
+                setPreview(URL.createObjectURL(e.target.files[0]));
               }}
             />
             <button style={{ display: 'none' }} type="submit">Post</button>
           </form>
-          <div className="postImage">
-            <img src="" alt="" />
+          <div className="postImg">
+            {preview && <img src={preview} alt="Preview" />}
           </div>
         </div>
         <div className="postform-bottom">
