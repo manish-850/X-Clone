@@ -1,8 +1,16 @@
 import React from 'react'
+import HomeLeft from '../Components/HomeLeft'
+import HomeRight from '../Components/HomeRight'
+import HomeCenter from '../Components/HomeCenter'
+import "../Styles/feed.scss"
 
 const Home = () => {
   return (
-    <div>Welcome to APP</div>
+    <main className='feed-container'>
+    <HomeLeft />
+    <HomeCenter />
+    <HomeRight />
+    </main>
   )
 }
 

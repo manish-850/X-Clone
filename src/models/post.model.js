@@ -7,12 +7,11 @@ const postSchema = new mongoose.Schema({
     },
     user: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
+        ref: "user",
         required: [true, "Post creation is not allowed without user."]
     },
     postImg: {
         type: String,
-        required: [true, "Image is required for post creation."]
     },
     likes: [{
             type: mongoose.Schema.Types.ObjectId,

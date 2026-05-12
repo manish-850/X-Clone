@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router";
-import { loginHandler } from "./auth.api";
+import { loginHandler } from "./Services/auth.api";
+import { feedHandler } from "../Post/Services/post.api";
 import "./Styles/form.scss";
 const Login = () => {
   const [userCredential, setUserCredential] = useState("");
@@ -9,14 +10,17 @@ const Login = () => {
   const formHandler = async (e) => {
     e.preventDefault();
     const data = await loginHandler(userCredential, password);
-    console.log(data)
+    console.log(data);
     navigate("/");
-  };
+    const PostData = await feedHandler();
+    console.log(PostData)
+  }
   return (
-    <main>
+    <main className="form-wrapper">
       <div className="form-container">
         <h3>Welcome back</h3>
         <form
+          className="auth-form"
           onSubmit={(e) => {
             formHandler(e);
           }}

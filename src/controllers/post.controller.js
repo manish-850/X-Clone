@@ -91,11 +91,23 @@ const dislikeController = async (req,res) => {
     })
 
 }
-
+const feedController = async (req,res) => {
+    try {
+        const posts = await postModel.find().populate("user");
+    return res.status(200).json({
+        message:"Feed fetched successfully",
+        posts
+    })
+    }
+    catch(err){
+        console.log(error)
+    }
+}
 module.exports = {
     createController,
     getController,
     getDetailsController,
     likeController,
-    dislikeController
+    dislikeController,
+    feedController
 }

@@ -1,27 +1,28 @@
-import { useState } from 'react'
-import { Link, useNavigate } from 'react-router';
-import { registerHandler } from './auth.api';
+import { useState } from "react";
+import { Link, useNavigate } from "react-router";
+import { registerHandler } from "./Services/auth.api";
 import "./Styles/form.scss";
 const Register = () => {
-    const [username, setUsername] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const navigate = useNavigate();
-    const formHandler = async (e)=>{
-        e.preventDefault();
-        const data = await registerHandler(username, email, password);
-        console.log(data)
-        navigate("/");
-    }
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const formHandler = async (e) => {
+    e.preventDefault();
+    const data = await registerHandler(username, email, password);
+    console.log(data);
+    navigate("/");
+  };
   return (
-    <main>
+    <main className="form-wrapper">
       <div className="form-container">
         <h3>Create your account</h3>
-        <form
-        onSubmit={(e)=>{
+        <form className="auth-form"
+          onSubmit={(e) => {
             formHandler(e);
-        }} 
-        action="">
+          }}
+          action=""
+        >
           <div className="input-container">
             <p>Username</p>
             <input
@@ -63,6 +64,6 @@ const Register = () => {
       </div>
     </main>
   );
-}
+};
 
-export default Register
+export default Register;
