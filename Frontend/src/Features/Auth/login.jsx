@@ -1,16 +1,18 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { loginHandler } from "./Services/auth.api";
 import { feedHandler } from "../Post/Services/post.api";
 import "./Styles/form.scss";
+import { UserDataContext } from "../../Context/UserContext";
 const Login = () => {
   const [userCredential, setUserCredential] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const {setUser}= useContext(UserDataContext);
   const formHandler = async (e) => {
     e.preventDefault();
     const data = await loginHandler(userCredential, password);
-    console.log(data);
+    setUser(data.user)
     navigate("/");
     const PostData = await feedHandler();
     console.log(PostData)

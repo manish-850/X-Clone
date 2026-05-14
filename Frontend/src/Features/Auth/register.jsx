@@ -1,16 +1,18 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { registerHandler } from "./Services/auth.api";
 import "./Styles/form.scss";
+import { UserDataContext } from "../../Context/UserContext";
 const Register = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const {setUser} = useContext(UserDataContext);
   const formHandler = async (e) => {
     e.preventDefault();
     const data = await registerHandler(username, email, password);
-    console.log(data);
+    setUser(data.user);
     navigate("/");
   };
   return (

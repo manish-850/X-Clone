@@ -45,7 +45,7 @@ const PostForm = ({ setShowPostForm, setRefreshFeed }) => {
               submitHandler(e, caption, postImg);
             }}
           >
-            <textarea
+            <textarea required
               onChange={(e) => {
                 setcaption(e.target.value);
               }}

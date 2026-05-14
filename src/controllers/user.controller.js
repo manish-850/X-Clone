@@ -51,7 +51,34 @@ const unfollow = async (req,res) =>{
     })
 }
 
+const getMe = async (req,res) => {
+    const user = await userModel.findOne({_id:req.user.userId}).select("-password");
+    return res.status(200).json({
+        message:"User found successfully",
+        user
+    })
+}
+
+const getFollowing = async (req,res) => {
+    const following = await followModel.find({follower:req.user.userId});
+    return res.status(200).json({
+        message:"Following found successfully",
+        following
+    })
+}
+
+const getFollowers = async (req,res) => {
+    const followers = await followModel.find({followee:req.user.userId}).populate("follower","-password");
+    return res.status(200).json({
+        message:"Followers found successfully",
+        followers
+    })
+}
+
 module.exports = {
     follow,
-    unfollow
+    unfollow,
+    getMe,
+    getFollowing,
+    getFollowers
 }

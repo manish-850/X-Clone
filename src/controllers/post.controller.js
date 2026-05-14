@@ -8,7 +8,6 @@ const createController = async (req, res) => {
     const { caption } = req.body;
     let response = {};
     if (req.file) response = await saveImgToImageKit(req.file);
-    console.log(response);
     const post = await postModel.create({
       caption,
       user: req.user.userId,

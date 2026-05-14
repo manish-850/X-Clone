@@ -1,4 +1,3 @@
-import React from 'react'
 import HomeLeft from '../Components/HomeLeft'
 import HomeRight from '../Components/HomeRight'
 import HomeCenter from '../Components/HomeCenter'
