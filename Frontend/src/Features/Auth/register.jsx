@@ -1,20 +1,45 @@
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { registerHandler } from "./Services/auth.api";
-import "./Styles/form.scss";
 import { UserDataContext } from "../../Context/UserContext";
+import { LoadingDataContext } from "../../Context/LoadingContext";
+import "./Styles/form.scss";
 const Register = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
   const {setUser} = useContext(UserDataContext);
+  const { loading, setLoading } = useContext(LoadingDataContext);
+  const navigate = useNavigate();
   const formHandler = async (e) => {
     e.preventDefault();
-    const data = await registerHandler(username, email, password);
-    setUser(data.user);
-    navigate("/");
+    try {
+          const data = await registerHandler(username, email, password);
+          setUser(data.user);
+          navigate("/");
+        } catch (err) {
+          console.log(err);
+        } finally {
+          setLoading(false);
+        }
   };
+
+  if (loading)
+    return (
+      <h2
+        style={{
+          backgroundColor: "black",
+          height: "100vh",
+          display: "flex",
+          alignItems: "center",
+          color: "#fff",
+          justifyContent: "center",
+        }}
+      >
+        User Registering....
+      </h2>
+    );
+
   return (
     <main className="form-wrapper">
       <div className="form-container">

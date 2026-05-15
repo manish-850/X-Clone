@@ -1,10 +1,9 @@
 import React, { useContext, useState, useEffect } from "react";
-import { useNavigate } from "react-router";
 import "../Styles/post.scss";
 import { UserDataContext } from "../../../Context/UserContext";
-import { followHandler, getFollowingHandler, getMeHandler } from "../../User/Services/user.api";
+import { followHandler, getFollowingHandler } from "../../User/Services/user.api";
 const Post = ({ postData }) => {
-  const { user,setUser, following, setFollowing } = useContext(UserDataContext);
+  const { user, following, setFollowing } = useContext(UserDataContext);
 
   const [isFollowing, setIsFollowing] = useState(false);
   const isFollowed = () => {
