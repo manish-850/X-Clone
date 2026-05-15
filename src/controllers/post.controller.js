@@ -14,9 +14,6 @@ const createController = async (req, res) => {
       url: req.file ? response.url : null,
       thumbnailUrl: req.file ? response.thumbnailUrl : null,
     });
-    const user = await userModel.findOne({ _id: req.user.userId });
-    user.posts.push(post._id);
-    await user.save();
 
     return res.status(201).json({
       message: "Post created successfully",

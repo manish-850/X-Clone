@@ -9,8 +9,9 @@ const Login = () => {
   const [userCredential, setUserCredential] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const { setUser } = useContext(UserDataContext);
+  const { user, setUser } = useContext(UserDataContext);
   const { loading, setLoading } = useContext(LoadingDataContext);
+  if(user) navigate("/");
   const formHandler = async (e) => {
     e.preventDefault();
     try {

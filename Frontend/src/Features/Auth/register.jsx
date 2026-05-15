@@ -8,9 +8,10 @@ const Register = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const {setUser} = useContext(UserDataContext);
+  const {user,setUser} = useContext(UserDataContext);
   const { loading, setLoading } = useContext(LoadingDataContext);
   const navigate = useNavigate();
+  if(user) navigate("/");
   const formHandler = async (e) => {
     e.preventDefault();
     try {
