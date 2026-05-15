@@ -19,17 +19,7 @@ const userSchema = new mongoose.Schema({
     profileImg: {
         type: String,
         default: "https://static.vecteezy.com/system/resources/thumbnails/035/857/753/small/people-face-avatar-icon-cartoon-character-png.png"
-    },
-    posts: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "post",
-        defalut: []
-    }],
-    saves: [{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "post",
-            defalut: []
-        }]
+    }
 })
 
 const userModel = mongoose.model("user", userSchema);

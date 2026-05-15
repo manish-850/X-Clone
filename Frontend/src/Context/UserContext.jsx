@@ -9,6 +9,7 @@ const UserContext = ({ children }) => {
   const [user, setUser] = useState(null);
   const [following, setFollowing] = useState([]);
   const [followers, setFollowers] = useState([]);
+   const [likedPost, setLikedPost] = useState([]);
   const { setLoading } = useContext(LoadingDataContext);
 
   useEffect(() => {
@@ -27,6 +28,7 @@ const UserContext = ({ children }) => {
     fetchUser();
   }, []);
 
+
   return (
     <UserDataContext.Provider
       value={{
@@ -36,6 +38,8 @@ const UserContext = ({ children }) => {
         setFollowing,
         followers,
         setFollowers,
+        likedPost,
+        setLikedPost,
       }}
     >
       {children}

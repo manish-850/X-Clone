@@ -117,6 +117,31 @@ const feedController = async (req, res) => {
     console.log(error);
   }
 };
+
+const getLikedPost = async (req, res) => {
+  try {
+    const likedPosts = await likeModel.find({ user: req.user.userId });
+    return res.status(200).json({
+      message: "Liked posts fetched successfully",
+      likedPosts,
+    });
+  } catch (err) {
+    console.log(error);
+  }
+}; 
+
+const getLikeCount = async(req, res) => {
+  try {
+    const likeCount = await likeModel.countDocuments({ post: req.params.postId });
+    return res.status(200).json({
+      message: "Like count fetched successfully",
+      likeCount,
+    });
+  } catch (err) {
+    console.log(error);
+  }
+};
+
 module.exports = {
   createController,
   getController,
@@ -124,4 +149,6 @@ module.exports = {
   likeController,
   dislikeController,
   feedController,
+  getLikedPost,
+  getLikeCount,
 };

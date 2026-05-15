@@ -17,3 +17,27 @@ export const postCreationHandler = async (formData) => {
     return response.data;
 }
 
+
+// like post
+export const likePostHandler = async (postId) => {
+    const response = await api.post(`/like/${postId}`);
+    return response.data;
+}
+
+// dislike post
+export const dislikePostHandler = async (postId) => {
+    const response = await api.post(`/dislike/${postId}`);
+    return response.data;
+}
+
+// get liked post by user
+export const getLikedPostHandler = async () => {
+    const response = await api.get("/liked");
+    return response.data;
+}
+
+// get like count
+export const getLikeCountHandler = async (postId) => {
+    const response = await api.get(`/likeCount/${postId}`);
+    return response.data;
+}

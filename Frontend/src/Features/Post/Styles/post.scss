@@ -55,6 +55,22 @@
         border: 1px solid rgb(63, 63, 63);
       }
     }
+    .post-center-bottom {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding-top: 0.5rem;
+      .likeBtn{
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+      }
+      svg {
+        cursor: pointer;
+        height: 20px;
+        color: #fff;
+      }
+    }
   }
   .post-right {
     width: 10%;
@@ -66,7 +82,7 @@
       height: 50%;
       button {
         background-color: #fff;
-        color: #000;
+        color: #000000;
         border-radius: 1.5rem;
         border: 0;
         height: 2rem;

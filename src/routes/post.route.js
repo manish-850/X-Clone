@@ -12,5 +12,7 @@ postRouter.get("/details/:postId", isLoggedIn, postConroller.getDetailsControlle
 postRouter.post("/like/:postId", isLoggedIn, postConroller.likeController);
 postRouter.post("/dislike/:postId", isLoggedIn, postConroller.dislikeController);
 postRouter.get("/feed", isLoggedIn, postConroller.feedController);
+postRouter.get("/liked", isLoggedIn, postConroller.getLikedPost);
+postRouter.get("/likeCount/:postId", isLoggedIn, postConroller.getLikeCount);
 
 module.exports = postRouter;

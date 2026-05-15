@@ -19,7 +19,7 @@ const ProtectedRoute = ({ children }) => {
           justifyContent: "center",
         }}
       >
-        Feed Loading....
+        Fetching user data....
       </h2>
     );
 

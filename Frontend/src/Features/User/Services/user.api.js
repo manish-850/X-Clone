@@ -17,6 +17,12 @@ export const followHandler = async (userId) => {
     return response.data;
 }
 
+// unfollow user
+export const unfollowHandler = async (userId) => {
+    const response = await api.post(`/unfollow/${userId}`);
+    return response.data;
+}
+
 // get following
 export const getFollowingHandler = async () => {
     const response = await api.get("/following");

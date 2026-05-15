@@ -40,7 +40,7 @@ const HomeCenter = () => {
           justifyContent: "center",
         }}
       >
-        Loading....
+        Feed Loading....
       </h2>
     );
 
