@@ -5,12 +5,29 @@ import { feedHandler } from "../Features/Post/Services/post.api";
 import { useEffect, useState } from "react";
 import AddPost from "../Features/Post/Components/AddPost";
 import { LoadingDataContext } from "../Context/LoadingContext";
+import { UserDataContext } from "../Context/UserContext";
+import { getLikedPostHandler } from "../Features/Post/Services/post.api";
+import { useContext } from "react";
+import { getFollowingHandler } from "../Features/User/Services/user.api";
 
 const HomeCenter = () => {
   const [posts, setPosts] = useState([]);
   const [showPostForm, setShowPostForm] = useState(false);
   const [refreshFeed, setRefreshFeed] = useState(false);
   const [loading, setLoading] = useState(false);
+  const { user, setLikedPost, setFollowing } = useContext(UserDataContext);
+
+  useEffect(() => {
+    try {
+      const fetchFollowing = async () => {
+        const res = await getFollowingHandler();
+        setFollowing(res.following);
+      };
+      fetchFollowing();
+    } catch (error) {
+      console.log(error);
+    }
+  }, [user]);
 
   useEffect(() => {
     const fetchFeed = async () => {
@@ -24,8 +41,21 @@ const HomeCenter = () => {
         setLoading(false);
       }
     };
+
     fetchFeed();
   }, [refreshFeed]);
+
+  useEffect(() => {
+    const fetchLikedPosts = async () => {
+      try {
+        const res = await getLikedPostHandler();
+        setLikedPost(res.likedPosts);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchLikedPosts();
+  }, []);
 
   if (loading)
     return (
@@ -33,7 +63,7 @@ const HomeCenter = () => {
         style={{
           backgroundColor: "black",
           height: "100vh",
-          width:"100%",
+          width: "100%",
           display: "flex",
           alignItems: "center",
           color: "#fff",

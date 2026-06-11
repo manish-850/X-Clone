@@ -16,11 +16,10 @@ const postSchema = new mongoose.Schema({
     thumbnailUrl: {
         type: String,
     },
-    likes: [{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "user",
-            defalut:[]
-        }],
+    likeCount: {
+        type: Number,
+        default: 0
+    },
     createdAt: Date
 
 })

@@ -1,34 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   followHandler,
-  unfollowHandler,
-  getFollowingHandler,
+  unfollowHandler
 } from "../../User/Services/user.api";
 import { UserDataContext } from "../../../Context/UserContext";
 import { useContext } from "react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const PostRight = ({ postData }) => {
-  const { user, following, setFollowing } = useContext(UserDataContext);
+  const { user, following } = useContext(UserDataContext);
   const [isFollowing, setIsFollowing] = useState(false);
 
-  const isFollowed = () => {
-    return following.some((u) => {
-      return u.followee === postData.user._id;
-    });
-  };
-
   useEffect(() => {
-    try{
-      const fetchFollowing = async () => {
-      const res = await getFollowingHandler();
-      setFollowing(res.following);
+    const checkIfFollowing = () => {
+      console.log("Checking if following:", following, postData.user._id);
+      const followingUser = following.some(
+        (follow) => follow.followee.toString() === postData.user._id.toString(),
+      );
+      setIsFollowing(followingUser);
     };
-    fetchFollowing();
-    } catch (error) {
-      console.log(error);
-    }
-  }, [isFollowing, user]);
+    checkIfFollowing();
+  }, [isFollowing, postData.user._id]);
   return (
     <div className="post-right">
       <div className="post-right-top">
@@ -36,7 +28,7 @@ const PostRight = ({ postData }) => {
           <button
             onClick={async () => {
               try {
-                if (isFollowed()) {
+                if (isFollowing) {
                   await unfollowHandler(postData.user._id);
                   setIsFollowing(false);
                 } else {
@@ -48,7 +40,7 @@ const PostRight = ({ postData }) => {
               }
             }}
           >
-            {isFollowed() ? "Following" : "Follow"}
+            {isFollowing ? "Following" : "Follow"}
           </button>
         )}
       </div>

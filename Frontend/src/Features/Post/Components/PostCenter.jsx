@@ -2,9 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import {
   likePostHandler,
-  dislikePostHandler,
-  getLikedPostHandler,
-  getLikeCountHandler,
+  dislikePostHandler
 } from "../Services/post.api";
 import "../Styles/post.scss";
 import { UserDataContext } from "../../../Context/UserContext";
@@ -13,34 +11,21 @@ import { useContext } from "react";
 
 const PostCard = ({ postData }) => {
   const [isLiked, setIsLiked] = useState(null);
-  const [likeCount, setLikeCount] = useState(0);
-  const { user, likedPost, setLikedPost } = useContext(UserDataContext);
+  const [likeCount, setLikeCount] = useState(postData.likeCount || 0);
+  const { likedPost } = useContext(UserDataContext);
 
-  useEffect(() => {
-  const fetchLikedPosts = async () => {
-    try {
-      const res = await getLikedPostHandler();
-      setLikedPost(res.likedPosts);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  fetchLikedPosts();
-}, [isLiked, user]);
-
-  useEffect(() => {
-    const fetchLikeCount = async () => {
-      try {
-        const res = await getLikeCountHandler(postData._id);
-        setLikeCount(res.likeCount);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    fetchLikeCount();
-  }, [isLiked]);
-
+  // useEffect(() => {
+  //   const fetchLikeCount = async () => {
+  //     try {
+  //       const res = await getLikeCountHandler(postData._id);
+  //       setLikeCount(res.likeCount);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+  //   fetchLikeCount();
+  // }, [postData._id, isLiked]);
+  console.log("Post data in PostCard:", postData);
   useEffect(() => {
     const checkIfLiked = () => {
       const liked = likedPost.some(
@@ -72,9 +57,11 @@ const PostCard = ({ postData }) => {
               try {
                 if (isLiked) {
                   await dislikePostHandler(postData._id);
+                  likeCount > 0 && setLikeCount(likeCount - 1);
                   setIsLiked(false);
                 } else {
                   await likePostHandler(postData._id);
+                  setLikeCount(likeCount + 1);
                   setIsLiked(true);
                 }
               } catch (error) {

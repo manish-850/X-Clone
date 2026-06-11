@@ -69,6 +69,9 @@ const likeController = async (req, res) => {
     return res.status(409).json({
       message: "Post has been already liked.",
     });
+  await postModel.findByIdAndUpdate(req.params.postId, {
+    likeCount: post.likeCount + 1,
+  });
   const like = await likeModel.create({
     post: req.params.postId,
     user: req.user.userId,
@@ -94,6 +97,9 @@ const dislikeController = async (req, res) => {
     return res.status(409).json({
       message: "Post has not liked.",
     });
+  await postModel.findByIdAndUpdate(req.params.postId, {
+    likeCount: post.likeCount - 1,
+  });
   const dislike = await likeModel.findOneAndDelete({
     post: req.params.postId,
     user: req.user.userId,
@@ -125,11 +131,13 @@ const getLikedPost = async (req, res) => {
   } catch (err) {
     console.log(error);
   }
-}; 
+};
 
-const getLikeCount = async(req, res) => {
+const getLikeCount = async (req, res) => {
   try {
-    const likeCount = await likeModel.countDocuments({ post: req.params.postId });
+    const likeCount = await likeModel.countDocuments({
+      post: req.params.postId,
+    });
     return res.status(200).json({
       message: "Like count fetched successfully",
       likeCount,
