@@ -68,7 +68,7 @@
       svg {
         cursor: pointer;
         height: 20px;
-        color: #fff;
+        color: #ededed;
       }
     }
   }
@@ -81,8 +81,8 @@
       width: 100%;
       height: 50%;
       button {
-        background-color: #fff;
-        color: #000000;
+        background-color: #ededed;
+        color: #111;
         border-radius: 1.5rem;
         border: 0;
         height: 2rem;
@@ -96,7 +96,7 @@
 
 //add post btn
 .createBtn-container {
-  background-color: rgb(255, 255, 255);
+  background-color: #ededed;
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -123,7 +123,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  background-color: #000000a6;
+  background-color: #111;
   z-index: 99;
   display: flex;
   justify-content: center;
@@ -131,7 +131,7 @@
   .postform-wrapper {
     width: 45%;
     min-height: 85%;
-    background-color: #333;
+    background-color: #222;
     border-radius: 2rem;
     padding: 1rem 2rem;
     display: flex;
@@ -161,7 +161,7 @@
           border: 0;
           outline: none;
           background-color: transparent;
-          color: #fff;
+          color: #ededed;
           padding-right: 1rem;
         }
         .caption::-webkit-scrollbar {
@@ -210,7 +210,8 @@
         width: 50%;
         height: 100%;
         button {
-          background-color: #fff;
+          background-color: #ededed;
+          color: #111;
           border-radius: 1.5rem;
           border: 0;
           font-size: 16px;

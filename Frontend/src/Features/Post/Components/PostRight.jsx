@@ -19,11 +19,15 @@ const PostRight = ({ postData }) => {
   };
 
   useEffect(() => {
-    const fetchFollowing = async () => {
+    try{
+      const fetchFollowing = async () => {
       const res = await getFollowingHandler();
       setFollowing(res.following);
     };
     fetchFollowing();
+    } catch (error) {
+      console.log(error);
+    }
   }, [isFollowing, user]);
   return (
     <div className="post-right">

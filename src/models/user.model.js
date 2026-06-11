@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema({
     bio: String,
     profileImg: {
         type: String,
-        default: "https://static.vecteezy.com/system/resources/thumbnails/035/857/753/small/people-face-avatar-icon-cartoon-character-png.png"
+        default: "https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg"
     }
 })
 

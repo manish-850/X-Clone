@@ -1,8 +1,8 @@
 .feed-container {
   min-height: 100vh;
   width: 100%;
-  background-color: #000000;
-  color: white;
+  background-color: #111;
+  color: #ededed;
   display: flex;
   position: relative;
 
@@ -10,7 +10,7 @@
     width: 25%;
     height: 100vh;
     padding: 2rem 3rem;
-    padding-right: 0;
+    padding-right: 1rem;
     display: flex;
     flex-direction: column;
     position: sticky;
@@ -83,6 +83,9 @@
           font-weight: 400;
           color: rgb(85, 85, 85);
         }
+      }
+      .logoutBtn{
+        cursor: pointer;
       }
     }
   }

@@ -11,7 +11,8 @@ const Top = () => {
             />
           </div>
         </div>
-        <div className="top-right"></div>
+        <div className="top-right">
+        </div>
       </div>
   )
 }

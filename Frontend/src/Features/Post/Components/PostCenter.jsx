@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect,useState } from "react";
+import { useEffect, useState } from "react";
 import {
   likePostHandler,
   dislikePostHandler,
@@ -12,24 +12,21 @@ import { RiHeart3Fill, RiHeart3Line } from "@remixicon/react";
 import { useContext } from "react";
 
 const PostCard = ({ postData }) => {
-    const [isLiked, setIsLiked] = useState(false);
-    const [likeCount, setLikeCount] = useState(0);
-    const { user, likedPost, setLikedPost } =
-        useContext(UserDataContext);
-
-  const isLikedPost = () => {
-    return likedPost.some((p) => {
-      return p._id === postData._id;
-    });
-  };
+  const [isLiked, setIsLiked] = useState(null);
+  const [likeCount, setLikeCount] = useState(0);
+  const { user, likedPost, setLikedPost } = useContext(UserDataContext);
 
   useEffect(() => {
-    const fetchLikedPosts = async () => {
+  const fetchLikedPosts = async () => {
+    try {
       const res = await getLikedPostHandler();
       setLikedPost(res.likedPosts);
-    };
-    fetchLikedPosts();
-  }, [isLiked, user]);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  fetchLikedPosts();
+}, [isLiked, user]);
 
   useEffect(() => {
     const fetchLikeCount = async () => {
@@ -43,6 +40,16 @@ const PostCard = ({ postData }) => {
 
     fetchLikeCount();
   }, [isLiked]);
+
+  useEffect(() => {
+    const checkIfLiked = () => {
+      const liked = likedPost.some(
+        (post) => post.post.toString() === postData._id.toString(),
+      );
+      setIsLiked(liked);
+    };
+    checkIfLiked();
+  }, [likedPost, postData._id]);
   return (
     <div className="post-center">
       <div className="post-center-top">
@@ -63,7 +70,7 @@ const PostCard = ({ postData }) => {
           <button
             onClick={async () => {
               try {
-                if (isLikedPost()) {
+                if (isLiked) {
                   await dislikePostHandler(postData._id);
                   setIsLiked(false);
                 } else {
@@ -75,7 +82,7 @@ const PostCard = ({ postData }) => {
               }
             }}
           >
-            {isLikedPost() ? <RiHeart3Fill /> : <RiHeart3Line />}
+            {isLiked ? <RiHeart3Fill color="red" /> : <RiHeart3Line />}
           </button>
           <small>{likeCount}</small>
         </div>
