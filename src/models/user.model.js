@@ -6,6 +6,10 @@ const userSchema = new mongoose.Schema({
         required: [true, "Username is required"],
         unique: [true, "Username already exists"],
     },
+    name: {
+        type: String,
+        required: [true, "Name is required"],
+    },
     email: {
         type: String,
         required: [true, "Email is required"],
@@ -13,7 +17,7 @@ const userSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        required: [true, "Email is required"]
+        required: [true, "Password is required"]
     },
     bio: String,
     profileImg: {

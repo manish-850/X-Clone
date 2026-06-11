@@ -3,26 +3,32 @@ import { Link, useNavigate } from "react-router";
 import { registerHandler } from "./Services/auth.api";
 import { UserDataContext } from "../../Context/UserContext";
 import { LoadingDataContext } from "../../Context/LoadingContext";
+import { useEffect } from "react";
 import "./Styles/form.scss";
 const Register = () => {
   const [username, setUsername] = useState("");
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const {user,setUser} = useContext(UserDataContext);
+  const { user, setUser } = useContext(UserDataContext);
   const { loading, setLoading } = useContext(LoadingDataContext);
   const navigate = useNavigate();
-  if(user) navigate("/");
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  }, [user, navigate]);
   const formHandler = async (e) => {
     e.preventDefault();
     try {
-          const data = await registerHandler(username, email, password);
-          setUser(data.user);
-          navigate("/");
-        } catch (err) {
-          console.log(err);
-        } finally {
-          setLoading(false);
-        }
+      const data = await registerHandler(username, name, email, password);
+      setUser(data.user);
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (loading)
@@ -45,7 +51,8 @@ const Register = () => {
     <main className="form-wrapper">
       <div className="form-container">
         <h3>Create your account</h3>
-        <form className="auth-form"
+        <form
+          className="auth-form"
           onSubmit={(e) => {
             formHandler(e);
           }}
@@ -60,6 +67,19 @@ const Register = () => {
               name="username"
               type="text"
               placeholder="Username"
+              value={username}
+            />
+          </div>
+          <div className="input-container">
+            <p>Name</p>
+            <input
+              onInput={(e) => {
+                setName(e.target.value);
+              }}
+              name="name"
+              type="text"
+              placeholder="Name"
+              value={name}
             />
           </div>
           <div className="input-container">
@@ -69,8 +89,9 @@ const Register = () => {
                 setEmail(e.target.value);
               }}
               name="email"
-              type="text"
+              type="email"
               placeholder="Email"
+              value={email}
             />
           </div>
           <div className="input-container">
@@ -82,6 +103,7 @@ const Register = () => {
               name="password"
               type="password"
               placeholder="Password"
+              value={password}
             />
           </div>
           <button type="submit">Register</button>

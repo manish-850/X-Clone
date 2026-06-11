@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 
 
 const registerController = async (req, res) => {
-    const { username, email, password, bio, profileImg } = req.body;
+    const { username,name, email, password, bio, profileImg } = req.body;
 
     const isUserExists = await userModel.findOne({
         $or: [{ username }, { email }]
@@ -18,7 +18,7 @@ const registerController = async (req, res) => {
             bcrypt.hash(password, salt, async (err, hash) => {
                 if (!err) {
                     const user = await userModel.create({
-                        username, email, password: hash, bio, profileImg
+                        username, name, email, password: hash, bio, profileImg
                     })
                     const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET_KEY);
                     res.cookie("token", token);
@@ -26,6 +26,7 @@ const registerController = async (req, res) => {
                         message: "User registered successfully",
                         user: {
                             username: user.username,
+                            name: user.name,
                             email: user.email,
                             bio: user.bio,
                             profileImg: user.profileImg,
@@ -68,6 +69,7 @@ const loginController = async (req, res) => {
                 message: "User loggedIn successfully",
                 user: {
                     username: user.username,
+                    name: user?.name,
                     email: user.email,
                     bio: user.bio,
                     profileImg: user.profileImg

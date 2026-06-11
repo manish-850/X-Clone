@@ -4,6 +4,7 @@ import { loginHandler } from "./Services/auth.api";
 import "./Styles/form.scss";
 import { UserDataContext } from "../../Context/UserContext";
 import { LoadingDataContext } from "../../Context/LoadingContext";
+import { useEffect } from "react";
 
 const Login = () => {
   const [userCredential, setUserCredential] = useState("");
@@ -11,7 +12,11 @@ const Login = () => {
   const navigate = useNavigate();
   const { user, setUser } = useContext(UserDataContext);
   const { loading, setLoading } = useContext(LoadingDataContext);
-  if(user) navigate("/");
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  }, [user, navigate]);
   const formHandler = async (e) => {
     e.preventDefault();
     try {

@@ -54,7 +54,7 @@ const PostCard = ({ postData }) => {
     <div className="post-center">
       <div className="post-center-top">
         <div className="post-center-top-left">
-          <p className="name">Manish</p>
+          <p className="name">{postData.user.name}</p>
           <p className="username">{"@" + postData.user.username}</p>
           <p className="time">20m</p>
         </div>

@@ -8,7 +8,7 @@ import { UserDataContext } from "../../Context/UserContext";
 const Bottom = () => {
   const navigate = useNavigate();
   const {setLoading} = useContext(LoadingDataContext);
-  const { setUser } = useContext(UserDataContext);
+  const { user, setUser } = useContext(UserDataContext);
   const logout = async () => {
     try {
       setLoading(true);
@@ -28,13 +28,13 @@ const Bottom = () => {
         <div className="user-info">
           <div className="profile-pic">
             <img
-              src="https://i.pinimg.com/736x/71/72/dd/7172ddc09dfbd4cc627ab217e84eb159.jpg"
+              src={user?.profileImg}
               alt=""
             />
           </div>
           <div className="user-details">
-            <div className="name">Manish</div>
-            <div className="username">@ManishDot_Dev</div>
+            <div className="name">{user?.name}</div>
+            <div className="username">{user?.username}</div>
           </div>
         </div>
       </div>
