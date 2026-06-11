@@ -1,5 +1,3 @@
-import React from 'react'
-
 const PostLeft = ({ postData }) => {
   return (
     <div className="post-left">
