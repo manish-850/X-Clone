@@ -7,7 +7,7 @@ const userRouter = require('./routes/user.route');
 const cors = require("cors");
 
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: "https://x-clone67.netlify.app",
     credentials: true
 }));
 app.use(express.json())

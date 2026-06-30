@@ -1,6 +1,6 @@
 import axios from 'axios';
 const api = axios.create({
-    baseURL: "http://localhost:3000/api/posts",
+    baseURL: "https://x-clone-0boc.onrender.com/api/posts",
     withCredentials: true
 })
 

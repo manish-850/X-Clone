@@ -1,8 +1,10 @@
 import axios from 'axios';
 const api = axios.create({
-    baseURL: "http://localhost:3000/api/auth",
+    baseURL: "https://x-clone-0boc.onrender.com/api/auth",
     withCredentials: true
 })
+
+
 
 // register
 export const registerHandler = async (username,name, email, password) => {
