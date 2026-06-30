@@ -21,7 +21,12 @@ const registerController = async (req, res) => {
                         username, name, email, password: hash, bio, profileImg
                     })
                     const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET_KEY);
-                    res.cookie("token", token);
+                    res.cookie("token", token, {
+                        httpOnly: true,
+                        secure: true,        // required for HTTPS
+                        sameSite: "none",    // required for cross-site cookies
+                        path: "/",
+                    });
                     res.status(201).json({
                         message: "User registered successfully",
                         user: {
@@ -64,7 +69,12 @@ const loginController = async (req, res) => {
         })
         if (result) {
             const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET_KEY);
-            res.cookie("token", token);
+            res.cookie("token", token, {
+                httpOnly: true,
+                secure: true,
+                sameSite: "none",
+                path: "/"
+            });
             return res.status(200).json({
                 message: "User loggedIn successfully",
                 user: {
